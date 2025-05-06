@@ -12,6 +12,9 @@ slack-bolt = "^1.18.0"
 python-dotenv = "^1.0.0"
 requests = "^2.31.0"
 
+[tool.poetry.scripts]
+ceda_status_slack_bot = "ceda_status_slack_bot.app:main"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

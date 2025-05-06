@@ -1808,6 +1808,10 @@ def handle_submit_changes(ack, body, client):
         )
 
 
-if __name__ == "__main__":
+def main():
     handler = SocketModeHandler(app, SLACK_APP_TOKEN)
     handler.start()
+
+
+if __name__ == "__main__":
+    main()
