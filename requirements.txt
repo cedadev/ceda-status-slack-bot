@@ -1,0 +1,8 @@
+certifi==2025.1.31 ; python_version >= "3.8" and python_version < "4.0"
+charset-normalizer==3.4.1 ; python_version >= "3.8" and python_version < "4.0"
+idna==3.10 ; python_version >= "3.8" and python_version < "4.0"
+python-dotenv==1.0.1 ; python_version >= "3.8" and python_version < "4.0"
+requests==2.32.3 ; python_version >= "3.8" and python_version < "4.0"
+slack-bolt==1.23.0 ; python_version >= "3.8" and python_version < "4.0"
+slack-sdk==3.35.0 ; python_version >= "3.8" and python_version < "4.0"
+urllib3==2.2.3 ; python_version >= "3.8" and python_version < "4.0"
