@@ -25,7 +25,9 @@ working_copies = {}
 original_statuses = None
 
 # List of authorised user IDs who can edit the status
-AUTHORISED_USERS = os.environ.get("AUTHORISED_USERS", "").split(",")
+AUTHORISED_USERS = [
+    user_id.strip() for user_id in os.environ.get("AUTHORISED_USERS", "").split(",")
+]
 
 # Set up logging
 logging.basicConfig(
@@ -33,7 +35,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-logger.critical(f"Authorised users: {AUTHORISED_USERS}")
+logger.info(f"Authorised users: {AUTHORISED_USERS}")
 
 
 def load_status_data():
