@@ -33,6 +33,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+logger.critical(f"Authorised users: {AUTHORISED_USERS}")
+
 
 def load_status_data():
     """Load status data from GitHub and reset changes flag"""
