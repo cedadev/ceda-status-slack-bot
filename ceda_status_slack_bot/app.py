@@ -137,6 +137,31 @@ def get_status_emoji(status_text):
     return "⚠️"  # Default warning emoji
 
 
+def is_user_authorized(client, user_id):
+    """Check if a user is authorized either directly or via group membership"""
+    # Direct user authorization check
+    if user_id in AUTHORISED_USERS:
+        return True
+
+    # Check if any entries are group IDs (starting with 'S')
+    group_ids = [group_id for group_id in AUTHORISED_USERS if group_id.startswith("S")]
+
+    if not group_ids:
+        # No group IDs to check
+        return False
+
+    # Check each group to see if the user is a member
+    for group_id in group_ids:
+        try:
+            response = client.usergroups_users_list(usergroup=group_id)
+            if response["ok"] and user_id in response["users"]:
+                return True
+        except Exception as e:
+            logger.error(f"Error checking user group membership: {str(e)}")
+
+    return False
+
+
 @app.command("/ceda-status")
 def ceda_status_command(ack, respond):
     """Handler for /ceda-status command"""
@@ -184,8 +209,8 @@ def open_edit_modal(ack, body, client, respond):
 
         user_id = body["user_id"]
 
-        # Check if user is authorised
-        if user_id not in AUTHORISED_USERS:
+        # Check if user is authorised (either directly or through a group)
+        if not is_user_authorized(client, user_id):
             # Send an error message
             respond(
                 "⛔ You are not authorised to edit CEDA service status. Please contact an administrator if you need access."
